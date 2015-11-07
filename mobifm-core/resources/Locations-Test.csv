@@ -1,0 +1,6 @@
+Name,GUID,x1,y1,x2,y2
+Meeting Room 1,guid1,0,0,100,100
+Meeting Room 2,guid2,100,100,200,200
+Meeting Room 3,guid3,200,200,300,300
+Conference Room 1,guid4,300,300,400,400
+Cafe,guid5,400,400,500,500
