@@ -14,9 +14,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.client.ClientConfig;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 import com.aechackathon.mobifm.Main;
 
@@ -46,11 +43,13 @@ public class ProximiAdapter {
 		
 		String jsonString = builder.get(String.class);
 		
-		JSONObject jsonObject = (JSONObject) JSONValue.parse(jsonString);
+//		JSONObject jsonObject = (JSONObject) JSONValue.parse(jsonString);
 		
-		for (HashMap.Node Node entry : jsonObject.entrySet()) {
-			System.out.println(entry.getClass() + " " + entry);
-		}
+		
+		
+//		for (HashMap.Node Node entry : jsonObject.entrySet()) {
+//			System.out.println(entry.getClass() + " " + entry);
+//		}
 		
 //		System.out.println(jsonObject.);
 		
