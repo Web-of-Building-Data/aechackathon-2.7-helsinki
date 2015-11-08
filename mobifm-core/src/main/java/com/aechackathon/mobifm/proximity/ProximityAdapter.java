@@ -2,6 +2,7 @@ package com.aechackathon.mobifm.proximity;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,10 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 import com.aechackathon.mobifm.Main;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -87,5 +92,7 @@ public class ProximityAdapter {
 		return jsonObject;
 
 	}
+
+	
 	
 }

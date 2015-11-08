@@ -6,6 +6,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import com.aechackathon.mobifm.bim.BimObjectDetector;
 import com.aechackathon.mobifm.proximity.ProximityAdapter;
+import com.aechackathon.mobifm.thingsee.ThingseeAdapter;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -96,6 +97,14 @@ public class Main {
     		
     		System.out.println("AnonymousVisitors");
     		System.out.println(proximity.getAnonymousVisitors());
+    		
+
+    		ThingseeAdapter thingsee = new ThingseeAdapter();
+    		Map<String, Double> thingseeReadings = thingsee.getThingseeData();
+    		System.out.println("Temperature: " + thingseeReadings.get("temperature") + 
+    				" Humidity: " + thingseeReadings.get("humidity") +
+    				" Pressure: " + thingseeReadings.get("pressure") +
+    				" Luminance: " + thingseeReadings.get("luminance") );
     		
     		
 //    		System.out.println("Working Directory = " + System.getProperty("user.dir"));
