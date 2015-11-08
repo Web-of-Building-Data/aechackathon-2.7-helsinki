@@ -5,13 +5,17 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import com.aechackathon.mobifm.bim.BimObjectDetector;
-import com.aechackathon.mobifm.proximi.ProximiAdapter;
+import com.aechackathon.mobifm.proximity.ProximityAdapter;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.NetworkInterface;
 import java.net.URI;
+import java.util.Enumeration;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import java.util.Properties;
 
 /**
@@ -54,17 +58,45 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
+    	
+//    	Enumeration<NetworkInterface> networks = NetworkInterface.getNetworkInterfaces();
+//    	while (networks.hasMoreElements()) {
+//    		NetworkInterface network = networks.nextElement();
+//    		System.out.println(network.getInetAddresses().nextElement());
+//    	}
+    	
 //        final HttpServer server = startServer();
 //        System.out.println(String.format("Jersey app started with WADL available at "
-//                + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
+//                + "%s/application.wadl\nHit enter to stop it...", getBaseUri()));
 //        System.in.read();
 //        server.stop();
     	
     	
     	try {
     		
-    		ProximiAdapter proximi = new ProximiAdapter();
-    		proximi.getData();
+    		ProximityAdapter proximity = new ProximityAdapter();
+    		System.out.println("Devices");
+    		Map<String, Object> devices = proximity.getDeviceByName(getConfigProperty("proximity.device.name"));
+    		
+    		System.out.println(devices);
+    		
+    		if (!devices.isEmpty()) {
+    			
+    			Map<?, ?> device = (Map<?, ?>)MapHelper.getFirstValue(devices);    			
+        		String departmentId = (String)device.get("departmentUID");
+        		System.out.println(departmentId);
+        	    		
+	    		System.out.println("Departments");
+	    		Map<String, Object> departments = proximity.getDepartmentById(departmentId);
+	    		
+	    		Map<?, ?> department = (Map<?, ?>) MapHelper.getFirstValue(departments);
+	    		
+        		System.out.println(department.get("name"));
+    		}
+    		
+    		System.out.println("AnonymousVisitors");
+    		System.out.println(proximity.getAnonymousVisitors());
+    		
     		
 //    		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 //    	
