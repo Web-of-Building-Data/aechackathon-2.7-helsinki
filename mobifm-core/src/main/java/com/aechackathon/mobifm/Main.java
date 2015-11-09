@@ -4,7 +4,6 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
-import com.aechackathon.mobifm.bim.BimObjectDetector;
 import com.aechackathon.mobifm.proximity.ProximityAdapter;
 import com.aechackathon.mobifm.thingsee.ThingseeAdapter;
 
@@ -66,45 +65,47 @@ public class Main {
 //    		System.out.println(network.getInetAddresses().nextElement());
 //    	}
     	
-//        final HttpServer server = startServer();
-//        System.out.println(String.format("Jersey app started with WADL available at "
-//                + "%s/application.wadl\nHit enter to stop it...", getBaseUri()));
-//        System.in.read();
-//        server.stop();
+    	DataResource.init();
+    	
+        final HttpServer server = startServer();
+        System.out.println(String.format("Jersey app started with WADL available at "
+                + "%s/application.wadl\nHit enter to stop it...", getBaseUri()));
+        System.in.read();
+        server.stop();
     	
     	
     	try {
     		
-    		ProximityAdapter proximity = new ProximityAdapter();
-    		System.out.println("Devices");
-    		Map<String, Object> devices = proximity.getDeviceByName(getConfigProperty("proximity.device.name"));
-    		
-    		System.out.println(devices);
-    		
-    		if (!devices.isEmpty()) {
-    			
-    			Map<?, ?> device = (Map<?, ?>)MapHelper.getFirstValue(devices);    			
-        		String departmentId = (String)device.get("departmentUID");
-        		System.out.println(departmentId);
-        	    		
-	    		System.out.println("Departments");
-	    		Map<String, Object> departments = proximity.getDepartmentById(departmentId);
-	    		
-	    		Map<?, ?> department = (Map<?, ?>) MapHelper.getFirstValue(departments);
-	    		
-        		System.out.println(department.get("name"));
-    		}
-    		
-    		System.out.println("AnonymousVisitors");
-    		System.out.println(proximity.getAnonymousVisitors());
-    		
-
-    		ThingseeAdapter thingsee = new ThingseeAdapter();
-    		Map<String, Double> thingseeReadings = thingsee.getThingseeData();
-    		System.out.println("Temperature: " + thingseeReadings.get("temperature") + 
-    				" Humidity: " + thingseeReadings.get("humidity") +
-    				" Pressure: " + thingseeReadings.get("pressure") +
-    				" Luminance: " + thingseeReadings.get("luminance") );
+//    		ProximityAdapter proximity = new ProximityAdapter();
+//    		System.out.println("Devices");
+//    		Map<String, Object> devices = proximity.getDeviceByName(getConfigProperty("proximity.device.name"));
+//    		
+//    		System.out.println(devices);
+//    		
+//    		if (!devices.isEmpty()) {
+//    			
+//    			Map<?, ?> device = (Map<?, ?>)MapHelper.getFirstValue(devices);    			
+//        		String departmentId = (String)device.get("departmentUID");
+//        		System.out.println(departmentId);
+//        	    		
+//	    		System.out.println("Departments");
+//	    		Map<String, Object> departments = proximity.getDepartmentById(departmentId);
+//	    		
+//	    		Map<?, ?> department = (Map<?, ?>) MapHelper.getFirstValue(departments);
+//	    		
+//        		System.out.println(department.get("name"));
+//    		}
+//    		
+//    		System.out.println("AnonymousVisitors");
+//    		System.out.println(proximity.getAnonymousVisitors());
+//    		
+//
+//    		ThingseeAdapter thingsee = new ThingseeAdapter();
+//    		Map<String, Double> thingseeReadings = thingsee.getThingseeData();
+//    		System.out.println("Temperature: " + thingseeReadings.get("temperature") + 
+//    				" Humidity: " + thingseeReadings.get("humidity") +
+//    				" Pressure: " + thingseeReadings.get("pressure") +
+//    				" Luminance: " + thingseeReadings.get("luminance") );
     		
     		
 //    		System.out.println("Working Directory = " + System.getProperty("user.dir"));
